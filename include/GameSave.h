@@ -10,31 +10,49 @@
 #include "XenoverseException.h"
 #include <string>
 #include <fstream>
+#include <map>
 #include <endian.h>
 
 #define GAME_SAVE_MAGIC (be32toh(0x23534156))
 #define ZENI_MAX_VALUE   999999999
+#define N_CHARACTERS     8
 
+/** On-disk game save character sub-section */
+typedef struct character_data
+{
+    char     character_name[16]; /* 0x30B10 */
+    int8_t   pad_00[88];
+    int32_t  level;              /* 0x30B78 */
+    int32_t  experience;         /* 0x30B7C */
+    int32_t  attribute_points;   /* 0x30B80 */
+    int32_t  max_health;         /* 0x30B84 */
+    int32_t  max_ki;             /* 0x30B88 */
+    int32_t  basic_attack;       /* 0x30B8C */
+    int32_t  strike_super;       /* 0x30B90 */
+    int32_t  ki_blast_super;     /* 0x30B94 */
+    int32_t  max_stamina;        /* 0x30B98 */
+    int8_t   pad_01[56];
+    int32_t  super_attack_2;     /* 0x30BD4 */
+    int32_t  super_attack_1;     /* 0x30BD8 */
+    int32_t  super_attack_3;     /* 0x30BDC */
+    int32_t  super_attack_4;     /* 0x30BE0 */
+    int32_t  ultimate_attack_2;  /* 0x30BE4 */
+    int32_t  ultimate_attack_1;  /* 0x30BE8 */
+    int32_t  evasive_move;       /* 0x30BEC */
+    int8_t   pad_02[656];
+} __attribute__((packed)) character_data_t; /* sizeof() = 0x370 */
+
+
+/** Game save on-disk structure */
 typedef struct game_save_data
 {
-    uint32_t magic;
-    int8_t   pad_00[12];
-    int32_t  zeni;
-    int8_t   pad_01[199420];
-    char     character_name[104]; //May contain other data
-    uint16_t level;
-    int8_t   pad_02[2];
-    int32_t  experience;
-    int32_t attribute_points;
-    int32_t  v5;
-    int8_t   pad_03[4];
-    int32_t  v6;
-    int32_t  strike_super;
-    uint16_t ki_blast_super;
-    int8_t   pad_04[2];
-    int32_t  v9;
-    int8_t   pad_05[11236];
-} __attribute__((packed)) game_save_data_t; //TODO: identify the stats
+    uint32_t         magic;
+    int8_t           pad_00[12];
+    int32_t          zeni;
+    int8_t           pad_01[199420];
+    character_data_t characters[N_CHARACTERS];
+    int8_t           pad_02[4336];
+} __attribute__((packed)) game_save_data_t; /* sizeof() = 0x33780 */
 
 
 class GameSave
@@ -122,6 +140,14 @@ private:
     /** Game save data */
     game_save_data_t data;
 
+    /** Super attack id -> name map */
+    static std::map<int32_t, std::string> super_attacks;
+
+    /** Ultimate attack id -> name map */
+    static std::map<int32_t, std::string> ultimate_attacks;
+
+    /** Evasive move id -> name map */
+    static std::map<int32_t, std::string> evasive_moves;
 };
 
 #endif //XENOVERSE_GAMESAVE_H
