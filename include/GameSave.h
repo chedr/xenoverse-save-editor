@@ -13,14 +13,15 @@
 #include <map>
 #include <endian.h>
 
-#define GAME_SAVE_MAGIC (be32toh(0x23534156))
-#define ZENI_MAX_VALUE   999999999
-#define N_CHARACTERS     8
+#define GAME_SAVE_MAGIC       (be32toh(0x23534156))
+#define ZENI_MAX_VALUE        999999999
+#define N_CHARACTERS          8
+#define CHARACTER_NAME_LENGTH 16
 
 /** On-disk game save character sub-section */
 typedef struct character_data
 {
-    char     character_name[16]; /* 0x30B10 */
+    char     character_name[CHARACTER_NAME_LENGTH]; /* 0x30B10 */
     int8_t   pad_00[88];
     int32_t  level;              /* 0x30B78 */
     int32_t  experience;         /* 0x30B7C */
@@ -98,6 +99,21 @@ public:
      */
     void set_zeni(int32_t zeni);
 
+
+    /**
+     * Clone character from slot to another slot
+     * Params: to slot
+     *         from slot
+     */
+    void clone_character(size_t to, size_t from);
+
+
+    /**
+     * Rename character
+     * Params: n
+     *         name
+     */
+    void rename_character(size_t n, std::string name);
 
 protected:
 

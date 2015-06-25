@@ -6,6 +6,7 @@
 
 #include "GameSave.h"
 #include <iostream>
+#include <string.h>
 
 std::map<int32_t, std::string> GameSave::super_attacks = {
         {140, "Acid"},
@@ -453,4 +454,19 @@ void GameSave::print(void) const throw() //TODO: label stats
 void GameSave::set_zeni(int32_t zeni)
 {
     this->data.zeni = zeni;
+}
+
+
+void GameSave::clone_character(size_t to, size_t from)
+{
+    memcpy(&this->data.characters[to],
+           &this->data.characters[from],
+           sizeof(character_data_t));
+}
+
+
+void GameSave::rename_character(size_t n, std::string name)
+{
+    snprintf((char *) &(this->data.characters[n].character_name),
+             CHARACTER_NAME_LENGTH - 1, "%s", name.c_str());
 }
