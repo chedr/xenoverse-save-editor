@@ -19,8 +19,7 @@ int main(int argc, char *argv[])
     } else if (argc == 3) { //Write mode
         GameSave game_save(argv[1]);
         game_save.print();
-        game_save.clone_character(1, 0);
-        game_save.rename_character(1, "Trombone");
+        //TODO: edit
         game_save.print();
         game_save.save(argv[2]);
     } else { //Invalid arguments

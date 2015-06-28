@@ -115,6 +115,106 @@ public:
      */
     void rename_character(size_t n, std::string name);
 
+
+    /**
+     * Set character level
+     * Params: n
+     *         level
+     */
+    void set_character_level(size_t n, uint32_t level);
+
+
+    /**
+     * Set character exp
+     * Params: n
+     *         experience
+     */
+    void set_character_experience(size_t n, uint32_t experience);
+
+
+    /**
+     * Set character attribute points
+     * Params: n
+     *         points
+     */
+    void set_character_attribute_points(size_t n, uint32_t points);
+
+
+    /**
+     * Set character health points
+     * Params: n
+     *         points
+     */
+    void set_character_max_health(size_t n, uint32_t points);
+
+
+    /**
+     * Set character basic attack points
+     * Params: n
+     *         points
+     */
+    void set_character_basic_attack(size_t n, uint32_t points);
+
+
+    /**
+     * Set character strike super points
+     * Params: n
+     *         points
+     */
+    void set_character_strike_super(size_t n, uint32_t points);
+
+
+    /**
+     * Set character ki blast super points
+     * Params: n
+     *         points
+     */
+    void set_character_ki_blast_super(size_t n, uint32_t points);
+
+
+    /**
+     * Set character max stamina points
+     * Params: n
+     *         points
+     */
+    void set_character_max_stamina(size_t n, uint32_t points);
+
+
+    /**
+     * Set character max stamina points
+     * Params: n
+     *         points
+     */
+    void set_character_max_ki(size_t n, uint32_t points);
+
+
+    /**
+     * Set character super attack
+     * Params: n
+     *         name
+     */
+    void set_character_super_attack_1(size_t n, std::string name);
+    void set_character_super_attack_2(size_t n, std::string name);
+    void set_character_super_attack_3(size_t n, std::string name);
+    void set_character_super_attack_4(size_t n, std::string name);
+
+
+    /**
+     * Set character ultimate attack
+     * Params: n
+     *         name
+     */
+    void set_character_ultimate_attack_1(size_t n, std::string name);
+    void set_character_ultimate_attack_2(size_t n, std::string name);
+
+
+    /**
+     * Set character ultimate attack
+     * Params: n
+     *         name
+     */
+    void set_character_evasive_move(size_t n, std::string name);
+
 protected:
 
     /**

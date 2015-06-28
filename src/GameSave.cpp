@@ -433,6 +433,8 @@ void GameSave::print(void) const throw() //TODO: label stats
         << std::endl <<
         "Max Stamina:       " <<  this->data.characters[i].max_stamina
         << std::endl <<
+        "Max Ki:            " <<  this->data.characters[i].max_ki
+        << std::endl <<
         "Super Attack 1:    " <<  GameSave::super_attacks[this->data.characters[i].super_attack_1]
         << std::endl <<
         "Super Attack 2:    " <<  GameSave::super_attacks[this->data.characters[i].super_attack_2]
@@ -469,4 +471,163 @@ void GameSave::rename_character(size_t n, std::string name)
 {
     snprintf((char *) &(this->data.characters[n].character_name),
              CHARACTER_NAME_LENGTH - 1, "%s", name.c_str());
+}
+
+
+void GameSave::set_character_level(size_t n, uint32_t level)
+{
+        this->data.characters[n].level = level;
+}
+
+
+void GameSave::set_character_experience(size_t n, uint32_t experience)
+{
+        this->data.characters[n].experience = experience;
+}
+
+
+void GameSave::set_character_attribute_points(size_t n, uint32_t points)
+{
+        this->data.characters[n].attribute_points = points;
+}
+
+
+void GameSave::set_character_max_health(size_t n, uint32_t points)
+{
+        this->data.characters[n].max_health = points;
+}
+
+
+void GameSave::set_character_basic_attack(size_t n, uint32_t points)
+{
+        this->data.characters[n].basic_attack = points;
+}
+
+
+void GameSave::set_character_strike_super(size_t n, uint32_t points)
+{
+        this->data.characters[n].strike_super = points;
+}
+
+
+void GameSave::set_character_ki_blast_super(size_t n, uint32_t points)
+{
+        this->data.characters[n].ki_blast_super = points;
+}
+
+
+void GameSave::set_character_max_stamina(size_t n, uint32_t points)
+{
+        this->data.characters[n].max_stamina = points;
+}
+
+
+void GameSave::set_character_max_ki(size_t n, uint32_t points)
+{
+        this->data.characters[n].max_ki = points;
+}
+
+
+void GameSave::set_character_super_attack_1(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].super_attack_1;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::super_attacks.begin();
+             it != GameSave::super_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].super_attack_1 = id;
+}
+
+
+void GameSave::set_character_super_attack_2(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].super_attack_2;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::super_attacks.begin();
+             it != GameSave::super_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].super_attack_2 = id;
+}
+
+
+void GameSave::set_character_super_attack_3(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].super_attack_3;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::super_attacks.begin();
+             it != GameSave::super_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].super_attack_3 = id;
+}
+
+
+void GameSave::set_character_super_attack_4(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].super_attack_4;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::super_attacks.begin();
+             it != GameSave::super_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].super_attack_4 = id;
+}
+
+
+void GameSave::set_character_ultimate_attack_1(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].ultimate_attack_1;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::ultimate_attacks.begin();
+             it != GameSave::ultimate_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].ultimate_attack_1 = id;
+}
+
+
+void GameSave::set_character_ultimate_attack_2(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].ultimate_attack_2;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::ultimate_attacks.begin();
+             it != GameSave::ultimate_attacks.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].ultimate_attack_2 = id;
+}
+
+
+void GameSave::set_character_evasive_move(size_t n, std::string name)
+{
+        int32_t id = this->data.characters[n].evasive_move;
+        std::map<int32_t, std::string>::iterator it;
+        for (it = GameSave::evasive_moves.begin();
+             it != GameSave::evasive_moves.end(); ++it) {
+                if (it->second == name) {
+                        id = it->first;
+                        break;
+                }
+        }
+        this->data.characters[n].evasive_move = id;
 }
